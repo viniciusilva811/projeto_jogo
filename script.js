@@ -15,13 +15,13 @@ let food ={
 }
 
 function criarBG() {
-    context.fillstyle = "lightgreen";
+    context.fillStyle = "lightgreen";
     context.fillRect(0, 0, 16 * box, 16 * box);//desenha o retângulo usando x e y e a largura e altura setadas
 }
 
 function criarCobrinha(){
     for(i=0; i< snake.length; i++){
-        context.fillstyle = "green";//cor
+        context.fillStyle = "green";//cor
         context.fillRect(snake[i].x, snake[i].y, box, box);//tamanho
     }
 }
@@ -49,6 +49,13 @@ function iniciarJogo(){
     if(snake[0].y > 15 * box && direction == "down") snake[0].u = 0;
     if(snake[0].y < 0 && direction == "up") snake[0].u = 16 * box;
     
+    for(i = 1; i < snake.length; i++){
+        if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
+            clearInterval(jogo);
+            alert('Game Over :(');
+        }
+    }
+
     criarBG();
     criarCobrinha();
     drawFood();
